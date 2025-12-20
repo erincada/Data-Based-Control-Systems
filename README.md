@@ -60,6 +60,23 @@ All simulations were implemented in MATLAB, and the report includes detailed exp
 
 ---
 
+### Homework 5 – On-Policy vs Off-Policy Reinforcement Learning (Cliff Walking)
+
+This assignment compares **Sarsa (on-policy)** and **Q-learning (off-policy)** algorithms using the classic Cliff Walking environment.  
+Both methods were implemented from scratch and evaluated over multiple independent runs to obtain averaged learning curves.
+
+The results highlight a key conceptual difference:  
+Sarsa accounts for the risk introduced by exploration and therefore learns a safer path away from the cliff, while Q-learning converges to the optimal (shortest) path but suffers from poor online performance due to occasional exploratory actions that lead to catastrophic penalties.
+
+**Included figure:**  
+- Average episode return comparison of Sarsa and Q-learning over 500 episodes.
+
+<p align="center">
+  <img src="images/hw5.png" width="650">
+</p>
+
+---
+
 ## Course Project
 
 ### Residual-Aware RL Tuning of MPC on Data-Driven Models
