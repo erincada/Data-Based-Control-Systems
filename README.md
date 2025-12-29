@@ -102,7 +102,7 @@ This project introduces a **Self-Correcting Control Framework** that enables a s
 The Linear MPC (Baseline) gets stuck at the bottom. The **Residual-Aware RL-MPC** (Ours) detects the model failure, switches to a "Recovery Mode" to gain momentum, and successfully reaches the goal.
 
 <div align="center">
-  <video src="videos/rl_mpc_success-episode-0.mp4" width="80%" controls autoplay loop muted></video>
+  <video src="images/rl_mpc_success-episode-0.mp4" width="80%" controls autoplay loop muted></video>
   <p><em>Figure 1: Successful swing-up maneuver achieved by the Residual-Aware Agent.</em></p>
 </div>
 
