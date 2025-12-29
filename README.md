@@ -92,6 +92,61 @@ Project materials in this repository include:
 - Supporting references and planned evaluation metrics.
 
 ---
+## 🚀 Final Project: Residual-Aware RL–MPC
+
+### Explicit Policy Conditioning on Model Reliability
+
+This project introduces a **Self-Correcting Control Framework** that enables a standard Linear MPC to solve the highly nonlinear **MountainCar** problem. Instead of using complex Nonlinear MPC solvers, we employ a **Reinforcement Learning (RL) Supervisor** that monitors the "trustworthiness" of the linear model in real-time.
+
+### 🎥 Demo: Solving the Mountain Car Problem
+The Linear MPC (Baseline) gets stuck at the bottom. The **Residual-Aware RL-MPC** (Ours) detects the model failure, switches to a "Recovery Mode" to gain momentum, and successfully reaches the goal.
+
+<div align="center">
+  <video src="videos/rl_mpc_success-episode-0.mp4" width="80%" controls autoplay loop muted></video>
+  <p><em>Figure 1: Successful swing-up maneuver achieved by the Residual-Aware Agent.</em></p>
+</div>
+
+---
+
+### 💡 The Core Concept: "Residual as a State"
+
+Most adaptive controllers look at the **Physical State** (Position, Velocity). We look at the **Model Reliability State** (Residual).
+
+$$r_t = \|y_{measured} - y_{predicted}\|$$
+
+* **Low Residual:** Trust the model $\to$ **Tracking Mode** (Aggressive).
+* **High Residual:** Model is failing $\to$ **Recovery Mode** (Conservative/Swing-up).
+
+### 🏗️ System Architecture
+The framework consists of an offline identification phase (N4SID) and an online control loop where the RL agent acts as a gain scheduler based on the residual signal.
+
+<p align="center">
+  <img src="images/rl_mpc_workflow.png" width="800" alt="System Architecture">
+  <br>
+  <em>Figure 2: The closed-loop architecture integrating Linear Prediction and RL-based Decision Making.</em>
+</p>
+
+---
+
+### 📊 Results & Strategy Analysis
+The plot below visualizes the "Self-Correction" logic.
+1.  **Red Line (Residual):** Spikes when the car hits the nonlinear gravity term on the hill.
+2.  **Magenta Line (Mode):** The RL agent immediately switches from **Mode 2 (Tracking)** to **Mode 1 (Recovery)**.
+3.  **Outcome:** The car reverses to gain potential energy (swing-up) instead of stalling.
+
+<p align="center">
+  <img src="images/RL-MPC Parameter Tuning.png" width="800" alt="Results Analysis">
+  <br>
+  <em>Figure 3: Time-series analysis showing the correlation between Model Mismatch (Residual) and RL Action (Mode Switching).</em>
+</p>
+
+| Metric | Baseline MPC | Residual-Aware RL–MPC |
+| :--- | :---: | :---: |
+| **Success Rate** | 0% | **100%** |
+| **Solver Type** | Convex QP | Convex QP + RL Lookup |
+| **Strategy** | Static | **Adaptive** |
+
+---
 
 ## Notes
 
