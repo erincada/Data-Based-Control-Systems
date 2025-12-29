@@ -2,6 +2,7 @@
 
 This repository contains my coursework for **ME 418/518 – Data-Based Control**.  
 It includes selected homework assignments, the midterm exam, and the course project, focusing on data-driven system identification, model predictive control (MPC), and learning-based control extensions.
+
 ---
 ## 🚀 Final Project: Residual-Aware RL–MPC
 
